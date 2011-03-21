@@ -103,7 +103,5 @@
             <directory>../hibernate-validator/target/docbook/publish</directory>
             <outputDirectory>docs/reference</outputDirectory>
         </fileSet>
-
     </fileSets>
-
 </assembly>
