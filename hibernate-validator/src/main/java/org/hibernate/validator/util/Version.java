@@ -16,6 +16,8 @@
  */
 package org.hibernate.validator.util;
 
+import org.hibernate.validator.util.logging.LoggerFactory;
+
 /**
  * @author Hardy Ferentschik
  */

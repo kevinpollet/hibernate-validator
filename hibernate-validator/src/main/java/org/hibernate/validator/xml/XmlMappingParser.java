@@ -50,7 +50,7 @@ import org.hibernate.validator.metadata.core.MetaConstraint;
 import org.hibernate.validator.metadata.descriptor.ConstraintDescriptorImpl;
 import org.hibernate.validator.metadata.core.ConstraintHelper;
 import org.hibernate.validator.metadata.location.BeanConstraintLocation;
-import org.hibernate.validator.util.LoggerFactory;
+import org.hibernate.validator.util.logging.LoggerFactory;
 import org.hibernate.validator.util.ReflectionHelper;
 import org.hibernate.validator.util.annotationfactory.AnnotationDescriptor;
 import org.hibernate.validator.util.annotationfactory.AnnotationFactory;

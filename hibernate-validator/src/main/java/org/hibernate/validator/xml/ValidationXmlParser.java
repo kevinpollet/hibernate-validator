@@ -35,7 +35,7 @@ import javax.xml.validation.SchemaFactory;
 import org.slf4j.Logger;
 import org.xml.sax.SAXException;
 
-import org.hibernate.validator.util.LoggerFactory;
+import org.hibernate.validator.util.logging.LoggerFactory;
 import org.hibernate.validator.util.ReflectionHelper;
 
 /**

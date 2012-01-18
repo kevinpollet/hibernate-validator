@@ -40,7 +40,7 @@ import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpo
 import org.hibernate.validator.resourceloading.PlatformResourceBundleLocator;
 import org.hibernate.validator.resourceloading.ResourceBundleLocator;
 import org.hibernate.validator.util.CollectionHelper;
-import org.hibernate.validator.util.LoggerFactory;
+import org.hibernate.validator.util.logging.LoggerFactory;
 import org.hibernate.validator.util.Version;
 import org.hibernate.validator.xml.ValidationBootstrapParameters;
 import org.hibernate.validator.xml.ValidationXmlParser;
