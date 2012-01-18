@@ -12,7 +12,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 import org.hibernate.validator.HibernateValidator;
@@ -23,6 +22,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.method.MethodConstraintViolationException;
 import org.hibernate.validator.method.MethodValidator;
 import org.hibernate.validator.testutil.ValidatorUtil;
+import org.hibernate.validator.util.logging.Log;
 import org.hibernate.validator.util.logging.LoggerFactory;
 
 import static org.hibernate.validator.testutil.ConstraintViolationAssert.assertNumberOfViolations;
@@ -36,7 +36,7 @@ import static org.testng.Assert.fail;
  * @author Kevin Pollet <kevin.pollet@serli.com> (C) 2011 SERLI
  */
 public class FailFastTest {
-	private static final Logger log = LoggerFactory.make();
+	private static final Log log = LoggerFactory.make();
 
 	private final A testInstance = new A();
 
@@ -230,7 +230,7 @@ public class FailFastTest {
 		}
 		long timeOfFailFast = System.nanoTime() - start;
 
-		log.debug( "Regular = " + timeOfRegular + "\n FailFast:" + timeOfFailFast );
+		log.debugf( "Regular = %d\n FailFast: %d", timeOfRegular, timeOfFailFast );
 	}
 
 	private void validateBatch(Validator validator) {

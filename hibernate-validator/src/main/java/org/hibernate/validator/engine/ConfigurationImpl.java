@@ -31,8 +31,6 @@ import javax.validation.spi.BootstrapState;
 import javax.validation.spi.ConfigurationState;
 import javax.validation.spi.ValidationProvider;
 
-import org.slf4j.Logger;
-
 import org.hibernate.validator.HibernateValidatorConfiguration;
 import org.hibernate.validator.cfg.ConstraintMapping;
 import org.hibernate.validator.engine.resolver.DefaultTraversableResolver;
@@ -40,8 +38,9 @@ import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpo
 import org.hibernate.validator.resourceloading.PlatformResourceBundleLocator;
 import org.hibernate.validator.resourceloading.ResourceBundleLocator;
 import org.hibernate.validator.util.CollectionHelper;
-import org.hibernate.validator.util.logging.LoggerFactory;
 import org.hibernate.validator.util.Version;
+import org.hibernate.validator.util.logging.Log;
+import org.hibernate.validator.util.logging.LoggerFactory;
 import org.hibernate.validator.xml.ValidationBootstrapParameters;
 import org.hibernate.validator.xml.ValidationXmlParser;
 
@@ -59,7 +58,7 @@ public class ConfigurationImpl implements HibernateValidatorConfiguration, Confi
 		Version.touch();
 	}
 
-	private static final Logger log = LoggerFactory.make();
+	private static final Log log = LoggerFactory.make();
 
 	private final ResourceBundleLocator defaultResourceBundleLocator = new PlatformResourceBundleLocator(
 			ResourceBundleMessageInterpolator.USER_VALIDATION_MESSAGES
@@ -196,7 +195,7 @@ public class ConfigurationImpl implements HibernateValidatorConfiguration, Confi
 					in.close();
 				}
 				catch ( IOException io ) {
-					log.warn( "Unable to close input stream." );
+					log.unableToCloseInputStream();
 				}
 			}
 		}
@@ -263,7 +262,8 @@ public class ConfigurationImpl implements HibernateValidatorConfiguration, Confi
 	 */
 	private void parseValidationXml() {
 		if ( ignoreXmlConfiguration ) {
-			log.info( "Ignoring XML configuration." );
+			log.ignoringXmlConfiguration();
+
 			// make sure we use the defaults in case they haven't been provided yet
 			if ( validationBootstrapParameters.getMessageInterpolator() == null ) {
 				validationBootstrapParameters.setMessageInterpolator( defaultMessageInterpolator );

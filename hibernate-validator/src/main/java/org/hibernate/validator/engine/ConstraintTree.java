@@ -32,12 +32,11 @@ import javax.validation.UnexpectedTypeException;
 import javax.validation.ValidationException;
 import javax.validation.metadata.ConstraintDescriptor;
 
-import org.slf4j.Logger;
-
 import org.hibernate.validator.constraints.CompositionType;
 import org.hibernate.validator.metadata.descriptor.ConstraintDescriptorImpl;
 import org.hibernate.validator.util.LRUMap;
 import org.hibernate.validator.util.TypeHelper;
+import org.hibernate.validator.util.logging.Log;
 import org.hibernate.validator.util.logging.LoggerFactory;
 
 import static org.hibernate.validator.constraints.CompositionType.ALL_FALSE;
@@ -51,10 +50,11 @@ import static org.hibernate.validator.constraints.CompositionType.OR;
  * @author Hardy Ferentschik
  * @author Federico Mancini
  * @author Dag Hovland
+ * @author Kevin Pollet <kevin.pollet@serli.com> (C) 2012 SERLI
  */
 public class ConstraintTree<A extends Annotation> {
 
-	private static final Logger log = LoggerFactory.make();
+	private static final Log log = LoggerFactory.make();
 	private static final int MAX_TYPE_CACHE_SIZE = 20;
 
 	private final ConstraintTree<?> parent;
@@ -134,8 +134,8 @@ public class ConstraintTree<A extends Annotation> {
 		Set<E> localViolationList = new HashSet<E>();
 		if ( !descriptor.getConstraintValidatorClasses().isEmpty() ) {
 			if ( log.isTraceEnabled() ) {
-				log.trace(
-						"Validating value {} against constraint defined by {}",
+				log.tracef(
+						"Validating value %s against constraint defined by %s.",
 						valueContext.getCurrentValidatedValue(),
 						descriptor
 				);
@@ -323,10 +323,8 @@ public class ConstraintTree<A extends Annotation> {
 			constraintValidatorCache.put( key, constraintValidator );
 		}
 		else {
-			if ( log.isTraceEnabled() ) {
-				log.trace( "Constraint validator {} found in cache" );
-			}
 			constraintValidator = (ConstraintValidator<A, V>) constraintValidatorCache.get( key );
+			log.tracef( "Constraint validator %s found in cache.", constraintValidator );
 		}
 		return constraintValidator;
 	}
