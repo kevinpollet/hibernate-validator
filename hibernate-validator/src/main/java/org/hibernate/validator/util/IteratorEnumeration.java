@@ -20,6 +20,9 @@ package org.hibernate.validator.util;
 import java.util.Enumeration;
 import java.util.Iterator;
 
+import org.hibernate.validator.util.logging.Log;
+import org.hibernate.validator.util.logging.LoggerFactory;
+
 /**
  * An {@link Enumeration} implementation, that wraps an {@link Iterator}. Can
  * be used to integrate older APIs working with enumerations with iterators.
@@ -29,6 +32,8 @@ import java.util.Iterator;
  */
 public class IteratorEnumeration<T> implements Enumeration<T> {
 
+	private static final Log log = LoggerFactory.make();
+
 	private Iterator<T> source;
 
 	/**
@@ -37,11 +42,7 @@ public class IteratorEnumeration<T> implements Enumeration<T> {
 	 * @param source The source iterator. Must not be null.
 	 */
 	public IteratorEnumeration(Iterator<T> source) {
-
-		if ( source == null ) {
-			throw new IllegalArgumentException( "Source must not be null" );
-		}
-
+		Contracts.assertNotNull( source, log.mustNotBeNull("Source") );
 		this.source = source;
 	}
 
